@@ -6,7 +6,7 @@ import com.javarush.island.model.Location;
 public class Duck extends Animal {
 
     public Duck() {
-        super("Duck");
+        super("Утка",4);
     }
 
     @Override

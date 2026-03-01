@@ -5,10 +5,16 @@ import com.javarush.island.model.Location;
 
 public class Wolf extends Animal {
     public Wolf() {
-        super("Wolf");
+        super("Волк",3);
     }
 
     @Override
     public void eat(Location location) {
+        for (Animal animal: location.getAnimals()){
+            if (!(animal instanceof Wolf)){
+                location.removeAnimal(animal);
+                break;
+            }
+        }
     }
 }
