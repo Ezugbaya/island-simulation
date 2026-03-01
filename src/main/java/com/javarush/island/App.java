@@ -5,6 +5,7 @@ import com.javarush.island.animal.herbivore.Rabbit;
 import com.javarush.island.animal.predator.Wolf;
 import com.javarush.island.model.Island;
 import com.javarush.island.model.Location;
+import com.javarush.island.simulation.SimpleSimulation;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -21,7 +22,12 @@ public class App {
         location.addAnimal(new Deer());
         location.addAnimal(new Wolf());
 
-        location.getAnimals()
-                .forEach(a -> log.info(a.getName()));
+        SimpleSimulation simulation = new SimpleSimulation(island);
+
+        for (int i = 0; i < 5; i++) {
+            log.info("Шаг: {}",i);
+            simulation.tick();
+            log.info("Животных осталось: {}",location.getAnimals().size());
+        }
     }
 }
