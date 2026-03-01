@@ -20,4 +20,7 @@ public class Location {
     public void removeAnimal (Animal animal){
         animals.remove(animal);
     }
+    public void addPlant (Plant plant){
+        plants.add(plant);
+    }
 }
