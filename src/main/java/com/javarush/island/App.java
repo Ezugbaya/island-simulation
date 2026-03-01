@@ -1,8 +1,8 @@
-package com.javarush;
+package com.javarush.island;
 
 //TIP Для <b>запуска</b> кода нажмите <shortcut actionId="Run"/> или
 // щелкните значок <icon src="AllIcons.Actions.Execute"/> в боковой области.
-public class Main {
+public class App {
     public static void main(String[] args) {
         //TIP Нажмите <shortcut actionId="ShowIntentionActions"/>, поместив каретку на выделенный текст
         // чтобы увидеть, как IntelliJ IDEA предлагает исправить это.
