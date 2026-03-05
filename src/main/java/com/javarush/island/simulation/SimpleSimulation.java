@@ -29,7 +29,15 @@ public class SimpleSimulation {
                     animal.eat(location);
                     //животное двигается
                     animal.move(island, i, j);
+
+                    Animal child = animal.reproduce();
+
+                    if (child != null) {
+                        location.addAnimal(child);
+                    }
                 }
+
+
             }
         }
         log.info("tick завершен");

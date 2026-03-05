@@ -1,6 +1,7 @@
 package com.javarush.island.animal.predator;
 
 import com.javarush.island.animal.Animal;
+import com.javarush.island.animal.herbivore.Rabbit;
 import com.javarush.island.model.Location;
 
 public class Wolf extends Animal {
@@ -16,5 +17,12 @@ public class Wolf extends Animal {
                 break;
             }
         }
+    }
+    @Override
+    public Animal reproduce() {
+        if (Math.random() < 0.3) {
+            return new Wolf();
+        }
+        return null;
     }
 }

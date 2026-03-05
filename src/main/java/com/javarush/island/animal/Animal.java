@@ -32,14 +32,14 @@ public abstract class Animal {
         int newX = x + dx;
         int newY = y + dy;
 
-        newX = Math.max(0,Math.min(island.getRows() -1,newX));
-        newY = Math.max(0,Math.min(island.getCols() -1,newY));
+        newX = Math.max(0, Math.min(island.getRows() - 1, newX));
+        newY = Math.max(0, Math.min(island.getCols() - 1, newY));
 
-        if (newX ==x && newY == y) {
+        if (newX == x && newY == y) {
             return;
         }
 
-        island.getLocation(newX,newY).addAnimal(this);
+        island.getLocation(newX, newY).addAnimal(this);
         island.getLocation(x, y).removeAnimal(this);
 
         //System.out.println(name + " передвинулся");
@@ -49,7 +49,7 @@ public abstract class Animal {
     public abstract void eat(Location location);
 
     //размножение
-    public void reproduce() {
-
+    public Animal reproduce() {
+        return null;
     }
 }

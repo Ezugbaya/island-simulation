@@ -11,8 +11,16 @@ public class Rabbit extends Animal {
 
     @Override
     public void eat(Location location) {
-        if (!location.getPlants().isEmpty()){
+        if (!location.getPlants().isEmpty()) {
             location.getPlants().remove(0);
         }
+    }
+
+    @Override
+    public Animal reproduce() {
+        if (Math.random() < 0.3) {
+            return new Rabbit();
+        }
+        return null;
     }
 }
