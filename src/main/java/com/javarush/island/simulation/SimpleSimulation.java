@@ -13,19 +13,22 @@ import java.util.List;
 public class SimpleSimulation {
     private Island island;
 
-    public SimpleSimulation(Island island){
+    public SimpleSimulation(Island island) {
         this.island = island;
     }
 
-    public void tick(){
+    public void tick() {
         for (int i = 0; i < island.getRows(); i++) {
             for (int j = 0; j < island.getCols(); j++) {
-                Location location = island.getLocation(i,j);
+                Location location = island.getLocation(i, j);
 
                 List<Animal> copy = new ArrayList<>(location.getAnimals());
 
-                for (Animal animal:copy){
+                for (Animal animal : copy) {
+                    //животное ест
                     animal.eat(location);
+                    //животное двигается
+                    animal.move(island, i, j);
                 }
             }
         }
