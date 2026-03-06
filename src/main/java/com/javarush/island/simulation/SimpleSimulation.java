@@ -12,9 +12,11 @@ import java.util.List;
 @Slf4j
 public class SimpleSimulation {
     private Island island;
+    private PlantGrowTask plantGrowTask;
 
     public SimpleSimulation(Island island) {
         this.island = island;
+        this.plantGrowTask = new PlantGrowTask(island);
     }
 
     public void tick() {
@@ -40,6 +42,7 @@ public class SimpleSimulation {
 
             }
         }
+        plantGrowTask.grow();
         log.info("tick завершен");
     }
 

@@ -25,9 +25,10 @@ public class App {
         SimpleSimulation simulation = new SimpleSimulation(island);
 
         for (int i = 0; i < 20; i++) {
-            log.info("Шаг: {}",i);
+            log.info("Шаг: {}", i);
             simulation.tick();
-            log.info("Животных осталось: {}",location.getAnimals().size());
+            log.info("Животных осталось: {}", location.getAnimals().size());
+            log.info("Растений в клетке: {}", location.getPlants().size());
         }
     }
 }
