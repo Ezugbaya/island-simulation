@@ -13,10 +13,12 @@ import java.util.List;
 public class SimpleSimulation {
     private Island island;
     private PlantGrowTask plantGrowTask;
+    private StaticsTask staticsTask;
 
     public SimpleSimulation(Island island) {
         this.island = island;
         this.plantGrowTask = new PlantGrowTask(island);
+        this.staticsTask = new StaticsTask(island);
     }
 
     public void tick() {
@@ -29,14 +31,17 @@ public class SimpleSimulation {
                 for (Animal animal : copy) {
                     //животное ест
                     animal.eat(location);
+
+                    if (location.getAnimals().size() >1) {
+
+                        Animal child = animal.reproduce();
+                        if (child != null) {
+                            location.addAnimal(child);
+
+                        }
+                    }
                     //животное двигается
                     animal.move(island, i, j);
-
-                    Animal child = animal.reproduce();
-
-                    if (child != null) {
-                        location.addAnimal(child);
-                    }
                 }
 
 
@@ -44,6 +49,7 @@ public class SimpleSimulation {
         }
         plantGrowTask.grow();
         log.info("tick завершен");
+        staticsTask.print();
     }
 
 }
