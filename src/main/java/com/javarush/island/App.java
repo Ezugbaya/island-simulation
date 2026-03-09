@@ -5,6 +5,7 @@ import com.javarush.island.animal.herbivore.Rabbit;
 import com.javarush.island.animal.predator.Wolf;
 import com.javarush.island.model.Island;
 import com.javarush.island.model.Location;
+import com.javarush.island.simulation.MultiSimulation;
 import com.javarush.island.simulation.SimpleSimulation;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Island island = new Island(10, 10);
 
@@ -22,7 +23,8 @@ public class App {
         location.addAnimal(new Deer());
         location.addAnimal(new Wolf());
 
-        SimpleSimulation simulation = new SimpleSimulation(island);
+        //SimpleSimulation simulation = new SimpleSimulation(island);
+        MultiSimulation simulation = new MultiSimulation(island);
 
         for (int i = 0; i < 20; i++) {
             log.info("Шаг: {}", i);
