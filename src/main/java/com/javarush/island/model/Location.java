@@ -5,14 +5,15 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Getter
 public class Location {
     //животные в клетке
-    private List<Animal> animals = new ArrayList<>();
+    private List<Animal> animals = new CopyOnWriteArrayList<>();
 
     //растения
-    private List<Plant> plants = new ArrayList<>();
+    private List<Plant> plants = new CopyOnWriteArrayList<>();
 
     public void addAnimal(Animal animal){
         animals.add(animal);
