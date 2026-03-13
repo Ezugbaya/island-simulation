@@ -20,7 +20,7 @@ public class PlantGrowTask {
         for (int i = 0; i < island.getRows(); i++) {
             for (int j = 0; j < island.getCols(); j++) {
                 Location location = island.getLocation(i, j);
-                int grow = (int) (Math.random() * 5);
+                int grow = (int) (Math.random() * 15);
                 for (int k = 0; k < grow; k++) {
                     location.addPlant(new Plant());
                 }

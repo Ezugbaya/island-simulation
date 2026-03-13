@@ -29,7 +29,7 @@ public class AnimalLifeTask implements Callable<Void> {
         animal.eat(location);
 
         //размножение
-        Animal child = animal.reproduce();
+        Animal child = animal.reproduce(location);
 
         if (child != null){
             location.addAnimal(child);

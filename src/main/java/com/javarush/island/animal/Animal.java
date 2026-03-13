@@ -20,6 +20,7 @@ public abstract class Animal {
 
     // сытость
     protected double foodLevel;
+
     //мах сытость
     protected double maxFood;
 
@@ -102,7 +103,7 @@ public abstract class Animal {
 
     //уменьшение сытости
     public void loseFood() {
-        foodLevel -= 1;
+        foodLevel -= maxFood * 0.2;
     }
 
     //проверка смерти
@@ -111,5 +112,21 @@ public abstract class Animal {
     }
 
     //размножение
-    public abstract Animal reproduce();
+    public Animal reproduce(Location location) {
+
+        long sameAnimals = location.getAnimals()
+                .stream()
+                .filter(a -> a.getClass() == this.getClass())
+                .count();
+
+        if (sameAnimals >= 2 && Math.random() < 0.01) { // 10% шанс
+            try {
+                return this.getClass().getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                return null;
+            }
+        }
+
+        return null;
+    }
 }

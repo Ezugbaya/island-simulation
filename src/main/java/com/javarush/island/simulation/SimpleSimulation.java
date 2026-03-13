@@ -34,7 +34,7 @@ public class SimpleSimulation {
 
                     if (location.getAnimals().size() >1) {
 
-                        Animal child = animal.reproduce();
+                        Animal child = animal.reproduce(location);
                         if (child != null) {
                             location.addAnimal(child);
 
@@ -49,7 +49,7 @@ public class SimpleSimulation {
         }
         plantGrowTask.grow();
         log.info("tick завершен");
-        staticsTask.print();
+        staticsTask.printStatistics();
     }
 
 }

@@ -15,11 +15,4 @@ public class Deer extends Animal {
             location.getPlants().remove(0);
         }
     }
-    @Override
-    public Animal reproduce() {
-        if (Math.random() < 0.3) {
-            return new Deer();
-        }
-        return null;
-    }
 }

@@ -16,11 +16,4 @@ public class Rabbit extends Animal {
         }
     }
 
-    @Override
-    public Animal reproduce() {
-        if (Math.random() < 0.3) {
-            return new Rabbit();
-        }
-        return null;
-    }
 }

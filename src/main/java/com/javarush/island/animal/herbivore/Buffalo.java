@@ -13,13 +13,4 @@ public class Buffalo extends Animal {
 
     }
 
-    @Override
-    public Animal reproduce() {
-
-        if (Math.random() < 0.3) {
-            return new Buffalo();
-        }
-
-        return null;
-    }
 }

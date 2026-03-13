@@ -12,13 +12,4 @@ public class Fox extends Animal {
     public void eat(Location location) {
     }
 
-    @Override
-    public Animal reproduce() {
-
-        if (Math.random() < 0.3) {
-            return new Fox();
-        }
-
-        return null;
-    }
 }

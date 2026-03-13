@@ -18,11 +18,4 @@ public class Wolf extends Animal {
             }
         }
     }
-    @Override
-    public Animal reproduce() {
-        if (Math.random() < 0.3) {
-            return new Wolf();
-        }
-        return null;
-    }
 }

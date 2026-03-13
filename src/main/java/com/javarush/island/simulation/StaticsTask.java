@@ -1,32 +1,55 @@
 package com.javarush.island.simulation;
 
+import com.javarush.island.animal.Animal;
 import com.javarush.island.model.Island;
 import com.javarush.island.model.Location;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 public class StaticsTask {
 
-    private Island island;
+    private final Island island;
 
     public StaticsTask(Island island) {
         this.island = island;
     }
 
-    public void print() {
-        int animals = 0;
+    public void printStatistics() {
+        Map<String, Integer> animals = new HashMap<>();
         int plants = 0;
-
         for (int i = 0; i < island.getRows(); i++) {
             for (int j = 0; j < island.getCols(); j++) {
-
                 Location location = island.getLocation(i, j);
 
-                animals += location.getAnimals().size();
+                // считаем животных
+                for (Animal animal : location.getAnimals()) {
+
+                    String name = animal.getClass().getSimpleName();
+
+                    animals.put(name,
+                            animals.getOrDefault(name, 0) + 1);
+                }
+
+                // считаем растения
                 plants += location.getPlants().size();
             }
         }
-        log.info("Животных: {}", animals);
-        log.info("Растений: {}", plants);
+
+        log.info("===== Статистика острова =====");
+        animals.forEach((animal, count) ->
+                log.info("{} : {}", animal, count));
+        log.info("Растений : {}", plants);
+
+        int totalAnimals = animals.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+
+        log.info("Всего животных : {}", totalAnimals);
     }
+
+
 }

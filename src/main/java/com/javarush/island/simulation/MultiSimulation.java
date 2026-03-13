@@ -48,7 +48,7 @@ public class MultiSimulation {
         //выполняем задачи параллельно
         executor.invokeAll(tasks);
         plantGrowTask.grow();
-        staticsTask.print();
+        staticsTask.printStatistics();
         log.info("Multi tick завершен");
     }
 }
