@@ -5,10 +5,20 @@ import com.javarush.island.model.Location;
 
 public class Bear extends Animal {
     public Bear() {
-        super("Медведь",2);
+        super("Медведь", 2);
     }
 
     @Override
     public void eat(Location location) {
+    }
+
+    @Override
+    public Animal reproduce() {
+
+        if (Math.random() < 0.3) {
+            return new Bear();
+        }
+
+        return null;
     }
 }

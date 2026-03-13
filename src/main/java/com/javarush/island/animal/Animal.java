@@ -90,7 +90,5 @@ public abstract class Animal {
     }
 
     //размножение
-    public Animal reproduce() {
-        return null;
-    }
+    public abstract Animal reproduce();
 }
