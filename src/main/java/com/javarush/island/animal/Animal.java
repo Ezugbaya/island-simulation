@@ -1,6 +1,8 @@
 package com.javarush.island.animal;
 
+import com.javarush.island.config.AnimalConfig;
 import com.javarush.island.config.EatMatrix;
+import com.javarush.island.model.Direction;
 import com.javarush.island.model.Island;
 import com.javarush.island.model.Location;
 import com.javarush.island.model.Plant;
@@ -33,25 +35,44 @@ public abstract class Animal {
 
     //движение
     public void move(Island island, int x, int y) {
-        Random random = new Random();
 
-        int dx = random.nextInt(3) - 1;
-        int dy = random.nextInt(3) - 1;
+        int speed = AnimalConfig.speed.get(this.getClass());
 
-        int newX = x + dx;
-        int newY = y + dy;
-
-        newX = Math.max(0, Math.min(island.getRows() - 1, newX));
-        newY = Math.max(0, Math.min(island.getCols() - 1, newY));
-
-        if (newX == x && newY == y) {
+        // если скорость 0 — животное не двигается
+        if (speed == 0) {
             return;
         }
 
-        island.getLocation(newX, newY).addAnimal(this);
-        island.getLocation(x, y).removeAnimal(this);
+        int newX = x;
+        int newY = y;
 
-        //System.out.println(name + " передвинулся");
+        // случайное количество шагов (не больше speed)
+        int steps = (int) (Math.random() * speed) + 1;
+
+        for (int i = 0; i < steps; i++) {
+
+            Direction direction = Direction.random();
+
+            switch (direction) {
+                case UP -> newX--;
+                case DOWN -> newX++;
+                case LEFT -> newY--;
+                case RIGHT -> newY++;
+            }
+
+            // проверяем границы острова
+            if (newX < 0 || newY < 0 ||
+                    newX >= island.getRows() ||
+                    newY >= island.getCols()) {
+
+                return;
+            }
+        }
+        Location oldLocation = island.getLocation(x, y);
+        Location newLocation = island.getLocation(newX, newY);
+
+        oldLocation.removeAnimal(this);
+        newLocation.addAnimal(this);
     }
 
     //питание
