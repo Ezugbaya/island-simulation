@@ -11,23 +11,21 @@ import java.util.Random;
 public class PlantGrowTask {
     private Island island;
 
-    public PlantGrowTask (Island island){
-        this.island=island;
+    public PlantGrowTask(Island island) {
+        this.island = island;
     }
 
-    public void grow(){
-        Random random = new Random();
+    public void grow() {
 
         for (int i = 0; i < island.getRows(); i++) {
             for (int j = 0; j < island.getCols(); j++) {
-
-                Location location = island.getLocation(i,j);
-
-                if (random.nextDouble()<0.3){
+                Location location = island.getLocation(i, j);
+                int grow = (int) (Math.random() * 5);
+                for (int k = 0; k < grow; k++) {
                     location.addPlant(new Plant());
                 }
             }
         }
-    log.info("Растение растет");
+        log.info("Растение растет");
     }
 }
