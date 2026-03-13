@@ -1,7 +1,9 @@
 package com.javarush.island.animal;
 
+import com.javarush.island.config.EatMatrix;
 import com.javarush.island.model.Island;
 import com.javarush.island.model.Location;
+import com.javarush.island.model.Plant;
 import lombok.Getter;
 
 import java.util.Random;
@@ -46,7 +48,29 @@ public abstract class Animal {
     }
 
     //питание
-    public abstract void eat(Location location);
+    public void eat(Location location) {
+        //попытка съесть животное
+        for (Animal prey : location.getAnimals()) {
+
+            //самого себя есть нельзя
+            if (prey == this) {
+                continue;
+            }
+            int chance = EatMatrix.getChance(this.getClass(), prey.getClass());
+            if (chance > 0 && Math.random() * 100 < chance) {
+                location.removeAnimal(prey);
+                return;
+            }
+        }
+        //попытка съесть растение
+        for (Plant plant : location.getPlants()) {
+            int chance = EatMatrix.getChance(this.getClass(), Plant.class);
+            if (chance > 0 && Math.random() * 100 < chance) {
+                location.getPlants().remove(plant);
+                return;
+            }
+        }
+    }
 
     //размножение
     public Animal reproduce() {
