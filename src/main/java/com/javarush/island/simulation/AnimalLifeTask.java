@@ -34,9 +34,15 @@ public class AnimalLifeTask implements Callable<Void> {
         if (child != null){
             location.addAnimal(child);
         }
+        animal.loseFood();
+
+        if (animal.isDead()) {
+            location.removeAnimal(animal);
+        }
 
         //движение
         animal.move(island,x,y);
         return null;
     }
+
 }

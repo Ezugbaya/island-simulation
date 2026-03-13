@@ -17,11 +17,18 @@ public abstract class Animal {
     protected int speed;
 
     // сытость
-    protected int foodLevel = 5;
+    protected double foodLevel;
+    //мах сытость
+    protected double maxFood;
 
     public Animal(String name, int speed) {
         this.name = name;
         this.speed = speed;
+    }
+
+    public Animal(double maxFood) {
+        this.maxFood = maxFood;
+        this.foodLevel = maxFood / 2;   // животное стартует наполовину сытым
     }
 
     //движение
@@ -49,27 +56,37 @@ public abstract class Animal {
 
     //питание
     public void eat(Location location) {
-        //попытка съесть животное
-        for (Animal prey : location.getAnimals()) {
 
-            //самого себя есть нельзя
-            if (prey == this) {
-                continue;
-            }
+        // пытаемся съесть животное
+        for (Animal prey : location.getAnimals()) {
+            if (prey == this) continue;
             int chance = EatMatrix.getChance(this.getClass(), prey.getClass());
             if (chance > 0 && Math.random() * 100 < chance) {
                 location.removeAnimal(prey);
+                foodLevel = Math.min(maxFood, foodLevel + 1);
                 return;
             }
         }
-        //попытка съесть растение
+
+        // пытаемся съесть растение
         for (Plant plant : location.getPlants()) {
             int chance = EatMatrix.getChance(this.getClass(), Plant.class);
             if (chance > 0 && Math.random() * 100 < chance) {
                 location.getPlants().remove(plant);
+                foodLevel = Math.min(maxFood, foodLevel + 1);
                 return;
             }
         }
+    }
+
+    //уменьшение сытости
+    public void loseFood() {
+        foodLevel -= 1;
+    }
+
+    //проверка смерти
+    public boolean isDead() {
+        return foodLevel <= 0;
     }
 
     //размножение
